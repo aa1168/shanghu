@@ -1,0 +1,120 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>后台登录</title>
+        <meta name="renderer" content="webkit" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="stylesheet" href="./assets/css/login.css" media="all" />
+        <style>
+            .smsBtn {
+                width: 100%;
+                box-sizing: border-box;
+                text-align: center;
+                border: 1px solid #009688;
+                color: #009688;
+                display: inline-block;
+                height: 38px;
+                line-height: 38px;
+                padding: 0;
+                cursor: pointer;
+            }
+        </style>
+        <link rel="stylesheet" href="./assets/libs/layui/css/layui.css" media="all" />
+    </head>
+
+    <body cz-shortcut-listen="true">
+        <div id="LAY_app">
+            <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
+                <div class="layadmin-user-login-main">
+                    <div class="layadmin-user-login-box layadmin-user-login-header">
+                        <h2>后台登录</h2>
+                    </div>
+                    <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
+                        <div class="layui-form-item">
+                            <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
+                            <input type="text" name="username" id="LAY-user-login-username" lay-verify="required" placeholder="手机号/账号" class="layui-input" data-sharkid="__0" />
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
+                            <input type="password" name="password" id="LAY-user-login-password" lay-verify="required" placeholder="登录密码" class="layui-input" data-sharkid="__1" />
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layadmin-user-login-icon layui-icon layui-icon-vercode" for="LAY-user-login-password"></label>
+                            <input type="text" name="gcode" id="LAY-user-login-gcode" lay-verify="required" placeholder="谷歌验证码-未开启可忽略" class="layui-input" data-sharkid="__2" />
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-row">
+                                <div class="layui-col-xs7">
+                                    <label class="layadmin-user-login-icon layui-icon layui-icon-vercode" for="LAY-user-login-vercode"></label>
+                                    <input type="text" name="vercode" id="LAY-user-login-vercode" lay-verify="required" placeholder="图形验证码" class="layui-input" data-sharkid="__3" maxlength="4" />
+                                </div>
+                                <div class="layui-col-xs5">
+                                    <div style="margin-left: 10px;">
+                                        <img src="./captcha.php" onclick="this.src='./captcha.php';" class="layadmin-user-login-codeimg" id="LAY-user-get-vercode" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <span class="layui-btn layui-btn-fluid" id="LAY-user-login-submit">登录</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-trans layadmin-user-login-footer">
+                    <p>© <script>document.write(new Date().getFullYear())</script></p>
+                </div>
+            </div>
+        </div>
+
+        <script src="./assets/libs/layui/layui.js"></script>
+        <script src="./assets/js/jquery-3.7.1.min.js"></script>
+        <script>
+            const layer = layui.layer;
+            var isDisabled = false;
+            layui.form.render();
+
+            $(document).ready(function() {
+                $("#LAY-user-login-submit").on("click", function () {
+                    if (!!isDisabled) return;
+
+                    var acname = $.trim($("#LAY-user-login-username").val());
+                    var pwd = $.trim($("#LAY-user-login-password").val());
+                    var code = $.trim($("#LAY-user-login-vercode").val());
+    
+                    if (!acname) return layer.msg('请输入您的手机号/账号');
+                    if (!pwd) return layer.msg('请填写您的密码');
+                    if (!code) return layer.msg('请填写图形验证码');
+
+                    $.ajax({
+                        url: `./verify.php`,
+                        method: 'POST',
+                        data: { captcha: code },
+                        success: function(data) {
+                            if (data === '1') {
+                                // handle success
+                                isDisabled = true;
+                                layer.msg('登录成功', { icon: 1 });
+                                setTimeout(() => location.href = './dashboard.html', 1500);
+                                return;
+                            }
+
+                            // handle failure
+                            $('#LAY-user-get-vercode').click();
+                            $("#LAY-user-login-vercode").val('')
+                            layer.msg('验证码错误');
+                        },
+                    })
+                });
+
+                $("#LAY-user-login-vercode,#LAY-user-login-password,#LAY-user-login-username").on("keyup", function (e) {
+                    if (e.keyCode == 13) {
+                        $("#LAY-user-login-submit").trigger("click");
+                    }
+                });
+            })
+        </script>
+    </body>
+</html>

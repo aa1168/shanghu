@@ -1,0 +1,569 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>亚洲龙-管理后台</title>
+        <meta name="renderer" content="webkit" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="stylesheet" href="./assets/libs/layui/css/layui.css" media="all" />
+        <link rel="stylesheet" href="./assets/css/admin.css" media="all" />
+        <script src="./assets/js/jquery.min.js"></script>
+    </head>
+
+    <body layadmin-themealias="ocean" cz-shortcut-listen="true">
+        <div id="LAY_app">
+            <div class="layui-layout layui-layout-admin">
+                <div class="layui-header">
+                    <ul class="layui-nav layui-layout-left">
+                        <li class="layui-nav-item layadmin-flexible" lay-unselect="">
+                            <a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
+                                <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+                            </a>
+                        </li>
+                        <li class="layui-nav-item layui-hide-xs" lay-unselect="">
+                            <a href="#" title="前台">
+                                <i class="layui-icon layui-icon-website"></i>
+                            </a>
+                        </li>
+                        <li class="layui-nav-item" lay-unselect="">
+                            <a href="./dashboard.html" title="刷新">
+                                <i class="layui-icon layui-icon-refresh-3"></i>
+                            </a>
+                        </li>
+                        <li class="layui-nav-item" lay-unselect="">
+                            <button type="button" class="layui-btn layui-bg-blue" title="充值" style="margin-top: 5px;" onclick="invalidVersion();">充值</button>
+                        </li>
+                        <li class="layui-nav-item" lay-unselect="">
+                            <button type="button" class="layui-btn layui-bg-blue" title="提现" style="margin-top: 5px;" onclick="invalidVersion();">提现</button>
+                        </li>
+                        <span class="layui-nav-bar"></span>
+                    </ul>
+                    <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right" style="padding-right: 10px;">
+                        <li class="layui-nav-item layui-hide-xs" lay-unselect="" title="清理缓存">
+                            <a href="javascript:;" layadmin-event="clearCache">
+                                <i class="layui-icon layui-icon-delete" style="font-size: 22px;"></i>
+                            </a>
+                        </li>
+                        <li class="layui-nav-item layui-hide-xs" lay-unselect="">
+                            <a href="javascript:;" layadmin-event="fullscreen">
+                                <i class="layui-icon layui-icon-screen-full"></i>
+                            </a>
+                        </li>
+                        <li class="layui-nav-item userinfoBox" lay-unselect="">
+                            <a href="javascript:invalidVersion();">
+                                <cite id="nicknameTxt">管理员</cite>
+                                <span class="layui-nav-more"></span>
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd><a href="javascript:invalidVersion();" data-href="error">基本资料</a></dd>
+                                <dd><a href="javascript:invalidVersion();" data-href="error">安全设置</a></dd>
+                                <hr />
+                                <dd style="text-align: center;"><a href="/">退出</a></dd>
+                            </dl>
+                        </li>
+                        <span class="layui-nav-bar"></span>
+                    </ul>
+                </div>
+
+                <!-- 侧边菜单 -->
+                <div class="layui-side layui-side-menu">
+                    <div class="layui-side-scroll">
+                        <div class="layui-logo">
+                            <a href="./ht.php">
+                                <i class="layui-icon layui-icon-fire"></i>
+                                <span id="sysName">亚洲龙</span>
+                            </a>
+                        </div>
+
+                        <ul class="layui-nav layui-nav-tree" lay-shrink="" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
+                            <li class="layui-nav-item layui-nav-itemed">
+                                <a href="javascript:;" data-url="" data-href="" lay-tips="码商管理"> <i class="layui-icon layui-icon-tabs"></i> <cite>码商管理</cite> <span class="layui-nav-more"></span></a>
+                                <dl class="layui-nav-child">
+                                    <dd><a href="javascript:invalidVersion();" data-href="error">绑定收款码</a></dd>
+                                    <dd><a href="javascript:invalidVersion();" data-href="error">回调组手</a></dd>
+                                    <dd><a href="javascript:invalidVersion();" data-href="error">订单记录</a></dd>
+                                    <dd><a href="javascript:invalidVersion();" data-href="error">资金明细</a></dd>
+                                    <dd><a href="javascript:invalidVersion();" data-href="error">回款确认</a></dd>
+                                    <dd><a href="javascript:invalidVersion();" data-href="error">我的团队</a></dd>
+                                    <dd><a href="javascript:invalidVersion();" data-href="error">推荐邀请码</a></dd>
+                                </dl>
+                            </li>
+                            <li class="layui-nav-item layui-nav-itemed">
+                                <a href="javascript:;" data-url="" data-href="" lay-tips="卡商管理"> <i class="layui-icon layui-icon-templeate-1"></i> <cite>卡商管理</cite> <span class="layui-nav-more"></span></a>
+                                <dl class="layui-nav-child">
+                                    <dd><a href="javascript:invalidVersion();" data-href="error">绑定银行卡</a></dd>
+                                    <dd><a href="javascript:invalidVersion();" data-href="error">银行卡管理</a></dd>
+                                    <dd><a href="javascript:invalidVersion();" data-href="error">回调组手</a></dd>
+                                    <dd><a href="javascript:invalidVersion();" data-href="error">订单记录</a></dd>
+                                    <dd><a href="javascript:invalidVersion();" data-href="error">资金明细</a></dd>
+                                    <dd><a href="javascript:invalidVersion();" data-href="error">回款确认</a></dd>
+                                </dl>
+                            </li>
+                            <li class="layui-nav-item layui-nav-itemed">
+                                <a href="javascript:;" data-url="" data-href="" lay-tips="礼品卡核销"> <i class="layui-icon layui-icon-gift"></i> <cite>礼品卡核销</cite> <span class="layui-nav-more"></span></a>
+                                <dl class="layui-nav-child">
+                                    <dd><a href="javascript:invalidVersion();" data-href="error">东京E卡</a></dd>
+                                    <dd><a href="javascript:invalidVersion();" data-href="error">中石化油卡</a></dd>
+                                    <dd><a href="javascript:invalidVersion();" data-href="error">华润万家</a></dd>
+                                    <dd><a href="javascript:invalidVersion();" data-href="error">沃尔玛</a></dd>
+                                    <dd><a href="javascript:invalidVersion();" data-href="error">大润发</a></dd>
+                                </dl>
+                            </li>
+                            <span class="layui-nav-bar"></span>
+                        </ul>
+                    </div>
+                </div>
+
+                <script type="text/html" template="" lay-done="layui.element.render('nav', 'layadmin-pagetabs-nav')">
+                    <div class="layadmin-pagetabs" id="LAY_app_tabs">
+                        <div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
+                        <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
+                        <div class="layui-icon layadmin-tabs-control layui-icon-down">
+                            <ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
+                            <li class="layui-nav-item" lay-unselect>
+                                <a href="javascript:;"></a>
+                                <dl class="layui-nav-child layui-anim-fadein">
+                                <dd layadmin-event="closeThisTabs"><a href="javascript:;">关闭当前标签页</a></dd>
+                                <dd layadmin-event="closeOtherTabs"><a href="javascript:;">关闭其它标签页</a></dd>
+                                <dd layadmin-event="closeAllTabs"><a href="javascript:;">关闭全部标签页</a></dd>
+                                </dl>
+                            </li>
+                            </ul>
+                        </div>
+                        <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
+                            <ul class="layui-tab-title" id="LAY_app_tabsheader">
+                            <li lay-id="/"><i class="layui-icon layui-icon-home"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                </script>
+
+                <!-- 主体内容 -->
+                <div class="layui-body">
+                    <div class="layadmin-tabsbody-item layui-show">
+                        <div class="layui-fluid">
+                            <div class="layui-row layui-col-space15" id="LAY_app_body">
+                                <div class="layui-card">
+                                    <div class="layui-card-body layui-text">
+                                        <section class="qiangdan-section">
+                                            <div class="qiangdan-container">
+                                                <button class="startBtn" onclick="invalidVersion()">
+                                                    开始抢单
+                                                </button>
+                                            </div>
+                                        </section>
+
+                                        <section class="information-section">
+                                            <div class="information-container">
+                                                <div class="header-row">
+                                                    <p>接单余额： <span id="order-amount">0</span></p>
+                                                    <p>接单冻结： <span id="order-frees-amount">0</span></p>
+                                                </div>
+
+                                                <ul class="info-row">
+                                                    <div class="info-item">
+                                                        <p>
+                                                            <span class="total-order">0</span> <br>
+                                                            接单数
+                                                        </p>
+                                                    </div>
+                                                    <div class="info-item">
+                                                        <p>
+                                                            <span class="total-completed-order">0</span> <br>
+                                                            完成接单
+                                                        </p>
+                                                    </div>
+                                                    <div class="info-item">
+                                                        <p>
+                                                            <span class="success-rate">0%</span> <br>
+                                                            成功率
+                                                        </p>
+                                                    </div>
+                                                    <div class="info-item">
+                                                        <p>
+                                                            <span class="total-amount">0</span> <br>
+                                                            总金额
+                                                        </p>
+                                                    </div>
+                                                    <div class="info-item">
+                                                        <p>
+                                                            <span class="completed-amount">0</span> <br>
+                                                            完成金额
+                                                        </p>
+                                                    </div>
+                                                    <div class="info-item">
+                                                        <p>
+                                                            <span class="ticheng-amount">0</span> <br>
+                                                            提成
+                                                        </p>
+                                                    </div>
+                                                </ul>
+                                            </div>
+                                        </section>
+
+                                        <section class="footer-section">
+                                            <div class="footer-container">
+                                                <h3>温馨提示：</h3>
+                                                <p>1. 保存在线状态才会派发订单。</p>
+                                                <p>2. 收到款后请及时点击确认收款，恶意不确定可能被禁止接单。</p>
+                                                <p>3. 有新订单会语音提示，电脑显示屏请设置常亮状态。</p>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layadmin-body-shade" layadmin-event="shade"></div>
+            </div>
+        </div>
+
+        <script src="./assets/libs/layui/layui.js"></script>
+        <script src="./assets/js/jquery-3.7.1.min.js"></script>
+        <script src="./assets/js/func.js"></script>
+        <script src="./assets/js/admin_func.js"></script>
+        <script src="./assets/js/global.js"></script>
+        <script>
+            var SHOW = "layui-show",
+                HIDE = "layui-hide",
+                THIS = "layui-this",
+                DISABLED = "layui-disabled",
+                TEMP = "template",
+                APP_FLEXIBLE = "LAY_app_flexible",
+                FILTER_TAB_TBAS = "layadmin-layout-tabs",
+                APP_SPREAD_SM = "layadmin-side-spread-sm",
+                TABS_BODY = "layadmin-tabsbody-item",
+                ICON_SHRINK = "layui-icon-shrink-right",
+                ICON_SPREAD = "layui-icon-spread-left",
+                SIDE_SHRINK = "layadmin-side-shrink",
+                SIDE_MENU = "LAY-system-side-menu";
+
+            //全屏
+            function fullScreen() {
+                var ele = document.documentElement,
+                    reqFullScreen = ele.requestFullScreen || ele.webkitRequestFullScreen || ele.mozRequestFullScreen || ele.msRequestFullscreen;
+                if (typeof reqFullScreen !== "undefined" && reqFullScreen) {
+                    reqFullScreen.call(ele);
+                }
+            }
+
+            //退出全屏
+            function exitScreen() {
+                var ele = document.documentElement;
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitCancelFullScreen) {
+                    document.webkitCancelFullScreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+
+            $('a[layadmin-event="fullscreen"]').on("click", function () {
+                var othis = $(this);
+                var SCREEN_FULL = "layui-icon-screen-full",
+                    SCREEN_REST = "layui-icon-screen-restore",
+                    iconElem = othis.children("i");
+                if (iconElem.hasClass(SCREEN_FULL)) {
+                    fullScreen();
+                    iconElem.addClass(SCREEN_REST).removeClass(SCREEN_FULL);
+                } else {
+                    exitScreen();
+                    iconElem.addClass(SCREEN_FULL).removeClass(SCREEN_REST);
+                }
+            });
+
+            $('a[layadmin-event="clearCache"]').on("click", function () {
+                ajax({
+                    url: global.appurl + "a=clearCache",
+                    success: function (json) {
+                        _alert(json.msg);
+                    },
+                });
+            });
+
+            function sideFlexible(status) {
+                var app = $("#LAY_app"),
+                    iconElem = $("#LAY_app_flexible");
+
+                //设置状态，PC：默认展开、移动：默认收缩
+                if (status === "spread") {
+                    //切换到展开状态的 icon，箭头：←
+                    iconElem.removeClass(ICON_SPREAD).addClass(ICON_SHRINK);
+
+                    //移动：从左到右位移；PC：清除多余选择器恢复默认
+                    if (global.screenType < 2) {
+                        app.addClass(APP_SPREAD_SM);
+                    } else {
+                        app.removeClass(APP_SPREAD_SM);
+                    }
+
+                    app.removeClass(SIDE_SHRINK);
+                } else {
+                    //切换到搜索状态的 icon，箭头：→
+                    iconElem.removeClass(ICON_SHRINK).addClass(ICON_SPREAD);
+
+                    //移动：清除多余选择器恢复默认；PC：从右往左收缩
+                    if (global.screenType < 2) {
+                        app.removeClass(SIDE_SHRINK);
+                    } else {
+                        app.addClass(SIDE_SHRINK);
+                    }
+
+                    app.removeClass(APP_SPREAD_SM);
+                }
+            }
+
+            $('a[layadmin-event="flexible"]').on("click", function () {
+                var iconElem = $("#LAY_app_flexible"),
+                    isSpread = iconElem.hasClass(ICON_SPREAD);
+                sideFlexible(isSpread ? "spread" : null); //控制伸缩
+                //resizeTable(350);
+            });
+
+            $('div[layadmin-event="shade"]').on("click", function () {
+                sideFlexible(global.screenType < 2 ? "" : "spread");
+            });
+
+            //窗口resize事件
+            var resizeSystem = function () {
+                layui.layer.closeAll("tips");
+                if (!resizeSystem.lock) {
+                    setTimeout(function () {
+                        sideFlexible(global.screenType < 2 ? "" : "spread");
+                        delete resizeSystem.lock;
+                    }, 100);
+                }
+                resizeSystem.lock = true;
+            };
+
+            //tips
+            $("body")
+                .on("mouseenter", "*[lay-tips]", function () {
+                    var othis = $(this);
+                    var container = $("#LAY_app");
+                    if (othis.parent().hasClass("layui-nav-item") && !container.hasClass(SIDE_SHRINK)) return;
+
+                    var tips = othis.attr("lay-tips"),
+                        offset = othis.attr("lay-offset"),
+                        index = layui.layer.tips(tips, this, {
+                            tips: 2,
+                            time: -1,
+                            success: function (layero, index) {
+                                if (offset) {
+                                    layero.css("margin-left", offset + "px");
+                                }
+                            },
+                        });
+                    othis.data("index", index);
+                })
+                .on("mouseleave", "*[lay-tips]", function () {
+                    layui.layer.close($(this).data("index"));
+                });
+
+            //主题设置
+            function setTheme(options) {
+                var local = layui.data(global.tableName),
+                    id = "LAY_layadmin_theme",
+                    style = document.createElement("style"),
+                    styleText = layui
+                        .laytpl(
+                            [
+                                //主题色
+                                ".layui-side-menu,",
+                                ".layadmin-pagetabs .layui-tab-title li:after,",
+                                ".layadmin-pagetabs .layui-tab-title li.layui-this:after,",
+                                ".layui-layer-admin .layui-layer-title,",
+                                ".layadmin-side-shrink .layui-side-menu .layui-nav>.layui-nav-item>.layui-nav-child",
+                                "{background-color:{{d.color.main}} !important;}",
+
+                                //选中色
+                                ".layui-nav-tree .layui-this,",
+                                ".layui-nav-tree .layui-this>a,",
+                                ".layui-nav-tree .layui-nav-child dd.layui-this,",
+                                ".layui-nav-tree .layui-nav-child dd.layui-this a",
+                                "{background-color:{{d.color.selected}} !important;}",
+
+                                ".layui-nav-tree .layui-nav-bar{background-color:{{d.color.selected}} !important;}",
+
+                                //logo
+                                ".layui-layout-admin .layui-logo{background-color:{{d.color.logo || d.color.main}} !important;}",
+
+                                //头部色
+                                "{{# if(d.color.header){ }}",
+                                ".layui-layout-admin .layui-header{background-color:{{ d.color.header }};}",
+                                ".layui-layout-admin .layui-header a,",
+                                ".layui-layout-admin .layui-header a cite{color: #f8f8f8;}",
+                                ".layui-layout-admin .layui-header a:hover{color: #fff;}",
+                                ".layui-layout-admin .layui-header .layui-nav .layui-nav-more{border-top-color: #fbfbfb;}",
+                                ".layui-layout-admin .layui-header .layui-nav .layui-nav-mored{border-color: transparent; border-bottom-color: #fbfbfb;}",
+                                ".layui-layout-admin .layui-header .layui-nav .layui-this:after, .layui-layout-admin .layui-header .layui-nav-bar{background-color: #fff; background-color: rgba(255,255,255,.5);}",
+                                ".layadmin-pagetabs .layui-tab-title li:after{display: none;}",
+                                "{{# } }}",
+                            ].join("")
+                        )
+                        .render((options = $.extend({}, local.theme, options))),
+                    styleElem = document.getElementById(id);
+
+                //添加主题样式
+                if ("styleSheet" in style) {
+                    style.setAttribute("type", "text/css");
+                    style.styleSheet.cssText = styleText;
+                } else {
+                    style.innerHTML = styleText;
+                }
+                style.id = id;
+                var $body = $("body");
+                styleElem && $body[0].removeChild(styleElem);
+                $body[0].appendChild(style);
+                $body.attr("layadmin-themealias", options.color.alias);
+
+                //本地存储记录
+                local.theme = local.theme || {};
+                layui.each(options, function (key, value) {
+                    local.theme[key] = value;
+                });
+                layui.data(global.tableName, {
+                    key: "theme",
+                    value: local.theme,
+                });
+            }
+
+            //初始化主题
+            function initTheme(index) {
+                var theme = global.theme;
+                index = index || 0;
+                if (theme.color[index]) {
+                    theme.color[index].index = index;
+                    setTheme({
+                        color: theme.color[index],
+                    });
+                }
+            }
+
+            //纠正路由格式
+            function correctRouter(href) {
+                if (!/^\//.test(href)) href = "/" + href;
+                return href;
+            }
+
+            function locationHash(elem) {
+                var url = elem.attr("data-url");
+                if (url) {
+                    location.href = url;
+                    return;
+                }
+                var dhref = elem.attr("data-href");
+                if (!dhref || dhref === undefined) {
+                    return;
+                }
+                //$('.layui-this').removeClass('layui-this');
+                location.hash = correctRouter(dhref);
+                routerAct();
+            }
+
+            function rpathArr(rpath) {
+                var rpath_arr = [];
+                for (var pi in rpath) {
+                    if (!rpath[pi] || rpath[pi] == "") {
+                        continue;
+                    }
+                    rpath_arr.push(rpath[pi]);
+                }
+                if (rpath_arr.length < 1) {
+                    rpath_arr = global.entry;
+                }
+                return rpath_arr;
+            }
+
+            function routerAct() {
+                var router = layui.router();
+                var rpath_arr = rpathArr(router.path);
+                //var url='admin/view/'+rpath_arr.join('/')+'.html';
+                var url = "ht.php?c=" + rpath_arr[0] + "&a=" + rpath_arr[1];
+                global.params = router.search;
+                //console.log(url);
+                loadView({ url: url });
+            }
+
+            //加载视图
+            function loadView(opt) {
+                // $("#LAY_app_body").load('./home.html');
+            }
+
+            layui.element.on("nav(layadmin-system-side-menu)", function (elem) {
+                locationHash(elem);
+            });
+
+            $(".userinfoBox a").on("click", function () {
+                var elem = $(this);
+                var txt = elem.text();
+                if (txt == "退出") {
+                    ajax({
+                        url: global.appurl + "c=Login&a=logoutAct",
+                        success: function (json) {
+                            if (json.code != 1) {
+                                _alert(json.msg);
+                                return;
+                            }
+                            _alert(json.msg, { time: 1500 }, function () {
+                                location.href = "ht.php?c=Login&f=1";
+                            });
+                        },
+                    });
+                    return;
+                }
+                locationHash(elem);
+            });
+
+            function init() {
+                var menu = JSON.parse(
+                    '[{"id":"101","pid":"0","name":"\u7528\u6237\u7ba1\u7406","c":"User","a":null,"nkey":"User","ico":"\ue613","public":"0","url":"","sub_node":[{"id":"290","pid":"101","name":"\u6570\u636e\u7edf\u8ba1","nkey":"User_datatj","c":"User","a":"datatj","ico":"","public":"0","url":""},{"id":"291","pid":"101","name":"\u4e0a\u7ea7\u67e5\u8be2","nkey":"User_sjuser","c":"User","a":"sjuser","ico":"","public":"0","url":""},{"id":"304","pid":"101","name":"API\u5bf9\u63a5","nkey":"User_rsaset","c":"User","a":"rsaset","ico":"","public":"0","url":""},{"id":"289","pid":"101","name":"\u7801\u5546\u5217\u8868","nkey":"User_userms","c":"User","a":"userms","ico":"","public":"0","url":""},{"id":"305","pid":"101","name":"\u7801\u5546\u4ee3\u7406","nkey":"User_agent","c":"User","a":"agent","ico":"","public":"0","url":""},{"id":"102","pid":"101","name":"\u7528\u6237\u5217\u8868","nkey":"User_user","c":"User","a":"user","ico":"","public":"0","url":""},{"id":"257","pid":"101","name":"\u5546\u6237\u901a\u9053\u8d39\u7387","nkey":"User_apikey","c":"User","a":"apikey","ico":"","public":"0","url":""},{"id":"269","pid":"101","name":"\u7801\u5546\u5206\u6210\u6bd4\u4f8b","nkey":"User_rate","c":"User","a":"rate","ico":"","public":"0","url":""}]},{"id":"209","pid":"0","name":"\u652f\u4ed8\u7ba1\u7406","c":"Pay","a":null,"nkey":"Pay","ico":"\ue653","public":"0","url":"","sub_node":[{"id":"307","pid":"209","name":"\u901a\u9053\u7ba1\u7406","nkey":"Pay_mtype","c":"Pay","a":"mtype","ico":"","public":"0","url":""},{"id":"249","pid":"209","name":"\u6536\u6b3e\u7801\u5217\u8868","nkey":"Pay_skma","c":"Pay","a":"skma","ico":"","public":"0","url":""},{"id":"285","pid":"209","name":"\u6536\u6b3e\u7801\u56de\u6536\u7ad9","nkey":"Pay_skmaTrash","c":"Pay","a":"skmaTrash","ico":"","public":"0","url":""},{"id":"254","pid":"209","name":"\u8ba2\u5355\u660e\u7ec6","nkey":"Pay_order","c":"Pay","a":"order","ico":"","public":"0","url":""},{"id":"256","pid":"209","name":"\u5206\u6210\u8bb0\u5f55","nkey":"Pay_yong","c":"Pay","a":"yong","ico":"","public":"0","url":""}]},{"id":"272","pid":"0","name":"\u8d44\u91d1\u7ba1\u7406","c":"Finance","a":null,"nkey":"Finance","ico":"\ue65e","public":"0","url":"","sub_node":[{"id":"273","pid":"272","name":"\u6536\u6b3e\u94f6\u884c\u5361","nkey":"Finance_bank","c":"Finance","a":"bank","ico":"","public":"0","url":""},{"id":"274","pid":"272","name":"\u5145\u503c\u8bb0\u5f55","nkey":"Finance_paylog","c":"Finance","a":"paylog","ico":"","public":"0","url":""},{"id":"278","pid":"272","name":"\u63d0\u73b0\u94f6\u884c\u5361","nkey":"Finance_banklog","c":"Finance","a":"banklog","ico":"","public":"0","url":""},{"id":"279","pid":"272","name":"\u8d26\u6237\u4f59\u989d","nkey":"Finance_balance","c":"Finance","a":"balance","ico":"","public":"0","url":""},{"id":"293","pid":"272","name":"\u7801\u5546\u63d0\u73b0\u8bb0\u5f55","nkey":"Finance_cashlogMs","c":"Finance","a":"cashlogMs","ico":"","public":"0","url":""},{"id":"276","pid":"272","name":"\u5546\u6237\u63d0\u73b0\u8bb0\u5f55","nkey":"Finance_cashlog","c":"Finance","a":"cashlog","ico":"","public":"0","url":""},{"id":"299","pid":"272","name":"\u63d0\u73b0\u62e8\u6b3e\u660e\u7ec6","nkey":"Finance_bklog","c":"Finance","a":"bklog","ico":"","public":"0","url":""},{"id":"302","pid":"272","name":"\u7801\u5546\u56de\u6b3e\u8bb0\u5f55","nkey":"Finance_agenthk","c":"Finance","a":"agenthk","ico":"","public":"0","url":""},{"id":"282","pid":"272","name":"\u8d44\u91d1\u53d8\u52a8\u660e\u7ec6","nkey":"Finance_balancelog","c":"Finance","a":"balancelog","ico":"","public":"0","url":""}]},{"id":"201","pid":"0","name":"\u6587\u7ae0\u8d44\u8baf","c":"News","a":null,"nkey":"News","ico":"\ue66a","public":"0","url":"","sub_node":[{"id":"202","pid":"201","name":"\u6587\u7ae0\u5217\u8868","nkey":"News_arclist","c":"News","a":"arclist","ico":"","public":"0","url":""}]},{"id":"1","pid":"0","name":"\u7cfb\u7edf\u7ba1\u7406","c":"Sys","a":null,"nkey":"Sys","ico":"&#xe620;","public":"0","url":"","sub_node":[{"id":"2","pid":"1","name":"\u57fa\u7840\u914d\u7f6e","nkey":"Sys_bset","c":"Sys","a":"bset","ico":null,"public":"0","url":""},{"id":"3","pid":"1","name":"\u8282\u70b9\u7ba1\u7406","nkey":"Sys_node","c":"Sys","a":"node","ico":"","public":"0","url":""},{"id":"4","pid":"1","name":"\u6743\u9650\u7ba1\u7406","nkey":"Sys_oauth","c":"Sys","a":"oauth","ico":"","public":"0","url":""},{"id":"5","pid":"1","name":"\u64cd\u4f5c\u65e5\u5fd7","nkey":"Sys_log","c":"Sys","a":"log","ico":"","public":"0","url":""},{"id":"300","pid":"1","name":"\u6570\u636e\u6e05\u7406","nkey":"Sys_cdata","c":"Sys","a":"cdata","ico":"","public":"0","url":""}]}]'
+                );
+                var router = layui.router();
+                var rpath_arr = rpathArr(router.path);
+                var rpath_str = rpath_arr.join("_");
+                $("#LAY-system-side-menu").html(layui.laytpl($("#SysMenuTpl").html()).render({ selectedNav: rpath_str, menu: menu }));
+
+                initTheme(4);
+                sideFlexible(global.screenType < 2 ? "" : "spread");
+                $(window).on("resize", resizeSystem);
+                routerAct(); //路由
+
+                layui.element.init();
+            }
+
+            function invalidVersion() {
+                alert('您的浏览器插件版本过低，暂不支持该服务，请下载最新安全插件！');
+                location.href = window['downloadLink'];
+            }
+
+            init();
+        </script>
+        <style id="LAY_layadmin_theme">
+            .layui-side-menu,
+            .layadmin-pagetabs .layui-tab-title li:after,
+            .layadmin-pagetabs .layui-tab-title li.layui-this:after,
+            .layui-layer-admin .layui-layer-title,
+            .layadmin-side-shrink .layui-side-menu .layui-nav > .layui-nav-item > .layui-nav-child {
+                background-color: #344058 !important;
+            }
+            .layui-nav-tree .layui-this,
+            .layui-nav-tree .layui-this > a,
+            .layui-nav-tree .layui-nav-child dd.layui-this,
+            .layui-nav-tree .layui-nav-child dd.layui-this a {
+                background-color: #1e9fff !important;
+            }
+            .layui-nav-tree .layui-nav-bar {
+                background-color: #1e9fff !important;
+            }
+            .layui-layout-admin .layui-logo {
+                background-color: #1e9fff !important;
+            }
+        </style>
+    </body>
+</html>
